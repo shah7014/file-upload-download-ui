@@ -15,7 +15,8 @@ export class AppComponent {
   fileNames: string[] = [];
   fileStatus = {status: '', requestType: '', percentage: 0};
 
-  onUploadFiles(files: File[]) {
+  onUploadFiles(event) {
+    const files: File[] = event.target.files;
     const formData = new FormData();
     for (let file of files) {
       formData.append('files', file, file.name);
@@ -60,6 +61,7 @@ export class AppComponent {
           }
         } else {
           //download logic we will get a blob
+          console.log('filename:- ' + event.headers.get('filename'));
           saveAs(event.body, event.headers.get('filename'));
         }
     }

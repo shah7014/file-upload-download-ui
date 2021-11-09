@@ -1,0 +1,26 @@
+<div class="container">
+  <h2 style="text-align: center; margin-top: 15px">Upload Download File</h2>
+  <p>Select files to be uploaded</p>
+  <div class="progress" *ngIf="fileStatus.status === 'progress'">
+    <div class="progress-bar progress-bar-animated bg-info" role="progressbar" [style.width.%]="fileStatus.percentage"></div>
+  </div>
+
+  <form enctype="multipart/form-data">
+    <fieldset>
+      <div class="form-group">
+        <div>
+          <input type="file" multiple name="files" (change)="onUploadFiles($event)">
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+  <div class="js-upload-finished" *ngIf="fileNames.length > 0">
+    <h5>Processed Files</h5>
+    <div class="list-group">
+      <a class="list-group-item list-group-item-success" style="cursor: pointer" *ngFor="let name of fileNames"> {{name}}
+        <a class="alert-success float-right" (click)="onDownloadFile(name)">Download</a>
+      </a>
+    </div>
+  </div>
+</div>
